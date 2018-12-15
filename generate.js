@@ -15,10 +15,24 @@ let createContentArea = function() {
     // imageSpace.setAttribute('src', 'test_images/2.jpg');
     // imageSpace.innerHTML = 'Hello world image';
     
-    let textSpace = document.createElement('div');
+    let textSpace = document.createElement('textArea');
     textSpace.setAttribute('id', 'textSpace_' + contentCount);
     textSpace.setAttribute('class', 'text_space');
-    // textSpace.innerHTML = 'Hello world text';
+    textSpace.style.boxSizing = 'border-box';
+    textSpace.value = 'Write your memory!';
+    textSpace.addEventListener('keypress', function (e) {
+        if (e.which === 13 && !e.shiftKey) {
+            let text = textSpace.value;
+            let newSpan = document.createElement('span');
+            newSpan.setAttribute('class', 'text_space');
+            newSpan.setAttribute('id', textSpace.getAttribute('id'));
+            newSpan.innerHTML = text;
+            newSpan.onclick = function () {
+                newSpan.parentElement.replaceChild(textSpace, newSpan);
+            }
+            textSpace.parentElement.replaceChild(newSpan, textSpace);
+        }
+    });
 
     let removeButton = document.createElement('button');
     removeButton.innerHTML = '&times';
@@ -98,10 +112,16 @@ let showEditMenu = function () {
 let createPreview = function () {
     setHeading();
     document.body.style.backgroundColor=document.getElementById('colorChoice').value;
+
     let inputFiles = document.getElementById('fileInput').files;
 
     Array.from(inputFiles).forEach(f => {
         renderImage(f);
+    });
+
+    let cardColor = document.getElementById('cardChoice').value;
+    document.querySelectorAll('.content_area').forEach(e => {
+        e.style.backgroundColor = cardColor;
     });
 }
 

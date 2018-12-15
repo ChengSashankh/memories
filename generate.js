@@ -1,25 +1,26 @@
 let contentCount = 0;
+let placeHolderText = 'Write your memory and press enter!';
 
 let setHeading = function () {
     document.getElementById('heading').innerHTML = document.getElementById('headingInput').value;
 }
 
-let createContentArea = function() {
+let createContentArea = function () {
     let areaElement = document.createElement('div');
     areaElement.setAttribute('id', 'content_' + contentCount);
     areaElement.setAttribute('class', 'content_area');
-    
+
     let imageSpace = document.createElement('img');
     imageSpace.setAttribute('id', 'imageSpace_' + contentCount);
     imageSpace.setAttribute('class', 'image_space');
     // imageSpace.setAttribute('src', 'test_images/2.jpg');
     // imageSpace.innerHTML = 'Hello world image';
-    
+
     let textSpace = document.createElement('textArea');
     textSpace.setAttribute('id', 'textSpace_' + contentCount);
     textSpace.setAttribute('class', 'text_space');
     textSpace.style.boxSizing = 'border-box';
-    textSpace.value = 'Write your memory!';
+    textSpace.value = placeHolderText;
     textSpace.addEventListener('keypress', function (e) {
         if (e.which === 13 && !e.shiftKey) {
             let text = textSpace.value;
@@ -64,9 +65,9 @@ let createContentArea = function() {
     //         document.getElementById('content-container').appendChild(document.createElement('hr'));
     //     document.getElementById('content-container').appendChild(rowElement);
     // } else {
-        // rowElement = document.getElementById('row_' + parseInt(contentCount / 3));
-        // rowElement.appendChild(areaElement);
-        document.getElementById('content-container').appendChild(areaElement);
+    // rowElement = document.getElementById('row_' + parseInt(contentCount / 3));
+    // rowElement.appendChild(areaElement);
+    document.getElementById('content-container').appendChild(areaElement);
     // }
     contentCount++;
 
@@ -76,7 +77,7 @@ let createContentArea = function() {
 let hideInputSection = function () {
     document.getElementById('inputSection').style.display = 'none';
     document.getElementById('addButton').style.display = 'none';
-    
+
     document.querySelectorAll('#remove').forEach(e => {
         e.style.display = 'none';
     });
@@ -101,7 +102,7 @@ let renderImage = function (inputSourceFile) {
 let showEditMenu = function () {
     document.getElementById('inputSection').style.display = 'block';
     document.getElementById('addButton').style.display = 'flex';
-    
+
     document.querySelectorAll('#remove').forEach(e => {
         e.style.display = 'block';
     });
@@ -111,7 +112,7 @@ let showEditMenu = function () {
 
 let createPreview = function () {
     setHeading();
-    document.body.style.backgroundColor=document.getElementById('colorChoice').value;
+    document.body.style.backgroundColor = document.getElementById('colorChoice').value;
 
     let inputFiles = document.getElementById('fileInput').files;
 
@@ -123,7 +124,47 @@ let createPreview = function () {
     document.querySelectorAll('.content_area').forEach(e => {
         e.style.backgroundColor = cardColor;
     });
+
+    document.querySelectorAll('textarea').forEach(e => {
+        let text = e.value;
+        let newSpan = document.createElement('span');
+        newSpan.setAttribute('class', 'text_space');
+        newSpan.setAttribute('id', e.getAttribute('id'));
+        newSpan.innerHTML = text;
+        
+        // if (text === placeHolderText) 
+            // newSpan.style.display = 'none';
+        
+        newSpan.onclick = function () {
+            newSpan.parentElement.replaceChild(e, newSpan);
+        }
+        e.parentElement.replaceChild(newSpan, e);
+    });
+
+    // generatePDF();
 }
+
+// let generatePDF = function () {
+//     var base64Img = null;
+// margins = {
+//   top: 70,
+//   bottom: 40,
+//   left: 30,
+//   width: 550
+// };
+//     var pdf = new jsPDF('p', 'pt', 'a4');
+//     pdf.setFontSize(18);
+//     pdf.fromHTML(document.getElementById('preview-wrapper'),
+//         margins.left, // x coord
+//         margins.top,
+//         {
+//             // y coord
+//             width: margins.width// max width of content on PDF
+//         }, function (dispose) {
+//             headerFooterFormatting(pdf)
+//         },
+//         margins);
+// }
 
 window.onload = function () {
     document.getElementById('showMenu').style.display = 'none';

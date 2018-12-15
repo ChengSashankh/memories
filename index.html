@@ -5,10 +5,29 @@
     </head>
     <body>
         <div id="inputArea">
-            <div id="inputSection" class="file_input"><input id="fileInput" type="file" multiple="multiple" class="file_input"><button id="createMontage" class="file_input">Create</button><button id="hideInputs" class="file_input" onclick="hideInputSection()">Hide Section</button></div>
+            <div id="inputSection" class="file_input">
+                <input id="fileInput" type="file" multiple="multiple" class="file_input">
+                <input type="text" id="headingInput" class="file_input" placeholder="Enter page heading">
+                <input type="color" id="colorChoice" class="file_input" value="#ffffff">
+                <button id="createMontage" class="file_input" onclick="createPreview();">Create</button>
+                <button id="hideInputs" class="file_input" onclick="hideInputSection()">Preview</button>
+                <hr/>
+            </div>
         </div>
-        <h1 id="heading" align="center">Old</h1>
-        <div id="content-container" class="content_container"></div>
-        <button onclick="createContentArea()">Test</button>
+        <h1 id="heading" align="center">Montage</h1>
+        <div id="content-container" class="content_container">
+            <div id="addButton" class="content_area">
+                <!-- <button class="btn"></button> -->
+                <input type="button" class="green_button" onclick="document.getElementById('addAreaButton').click()" value="+">
+                <input type="file" style="display: none;" id="addAreaButton" onchange="if(this.files[0]) {renderImage( document.getElementById('addAreaButton').files[0]);}">
+            </div>
+        </div>
+        <br/>
+        <hr/>
+        <p align="center"><button onclick="showEditMenu();" class="show_menu" id="showMenu">Edit Page</button></p>
+        <footer align="center">
+            <p>Save this HTML file to share and preview later!</p>
+            <p>Developed by: <a href="mailto:cksashankh@gmail.com">Sashankh C K</a></p>
+        </footer>
     </body>
 </html>

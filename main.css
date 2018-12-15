@@ -2,12 +2,21 @@ body {
     background-color: white;
 }
 
+h1 {
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-family: cursive;
+    font-weight: 300;
+}
+
 .content_container {
-    border: 2px inset antiquewhite;
+    /* border: 2px inset antiquewhite; */
     border-radius: 6px;
     padding: 1%;
     overflow: hidden;
     resize: both;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .content_area {
@@ -22,13 +31,67 @@ body {
     transition: transform .2s;
 }
 
+.add_area {
+    border: 2px dashed #68d368;
+    border-radius: 9px;
+    width: 28%;
+    height: 40%;
+    margin: 2%;
+    transition: transform .2s;
+    vertical-align: middle;
+}
+
+.green_button {
+    background-color: #68d368;
+    border-radius: 40px;
+    border: solid #68d368;
+    width: 15%;
+    height: 20%;
+    font-size: 200%;
+    font-family: sans-serif;
+    display: block;
+    /* margin: auto; */
+    transition: transform .2s;
+}
+
 .content_area:hover {
     transform: scale(1.15);
     background-color: rgb(218, 183, 139);
 }
+/* 
+.content_area:hover .remove_button{
+    display: block;
+} */
+
+.green_button:hover {
+    transform: scale(1.5);
+}
+
+#addButton {
+    border: 2px dashed #68d368;
+    background-color: white;
+    border-radius: 9px;
+    width: 28%;
+    height: 40%;
+    margin-left: auto;
+    margin-right: auto;
+    transition: transform .2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#inputArea {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.showMenu {
+}
 
 .image_space {
-    border: 0.5px solid black;
+    /* border: 0.5px solid black; */
     overflow: hidden;
     resize: both;
     border-radius: 3px;
@@ -36,20 +99,31 @@ body {
     margin: 10px auto;
     min-height: 40%;
     max-height: 75%;
+    max-width: 90%;
     display: block;
 }
 
 .text_space {
-    border: 0.5px solid black;
+    /* border: 0.5px solid black; */
     border-radius: 6px;
     padding: 1px;
-    margin: 2%;
+    margin: 2% auto;
     text-align: center;
+    max-width: 80%;
+    display: block;
+    resize: both;
+    overflow: hidden;
 }
 
 .file_input {
     margin: 1%;
     display: inline;
+    border-radius: 5px;
+    border: 1px solid gray;
+}
+
+#inputSection {
+    border: none;
 }
 
 hr {

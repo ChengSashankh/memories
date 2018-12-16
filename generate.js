@@ -51,10 +51,11 @@ let createContentArea = function () {
         document.getElementById('content_' + toRemove).style.display = 'none';
     }
 
+    areaElement.appendChild(document.createElement('hr'));
     areaElement.appendChild(removeButton);
     areaElement.appendChild(imageSpace);
     areaElement.appendChild(textSpace);
-
+    areaElement.appendChild(document.createElement('hr'));
     let rowElement = undefined;
     // if (contentCount % 3 === 0) {
     //     rowElement = document.createElement('div');
@@ -123,6 +124,9 @@ let createPreview = function () {
     let cardColor = document.getElementById('cardChoice').value;
     document.querySelectorAll('.content_area').forEach(e => {
         e.style.backgroundColor = cardColor;
+        e.onmouseover = function() {
+            document.getElementById('textSpace_' + this.id.split('_')[1]).style.display = 'block';
+        }
     });
 
     document.querySelectorAll('textarea').forEach(e => {
@@ -132,8 +136,8 @@ let createPreview = function () {
         newSpan.setAttribute('id', e.getAttribute('id'));
         newSpan.innerHTML = text;
         
-        // if (text === placeHolderText) 
-            // newSpan.style.display = 'none';
+        if (text === placeHolderText) 
+            newSpan.style.display = 'none';
         
         newSpan.onclick = function () {
             newSpan.parentElement.replaceChild(e, newSpan);

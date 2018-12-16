@@ -124,8 +124,15 @@ let createPreview = function () {
     let cardColor = document.getElementById('cardChoice').value;
     document.querySelectorAll('.content_area').forEach(e => {
         e.style.backgroundColor = cardColor;
-        e.onmouseover = function() {
-            document.getElementById('textSpace_' + this.id.split('_')[1]).style.display = 'block';
+        e.onmouseover = function () {
+            let element = document.getElementById('textSpace_' + this.id.split('_')[1]);
+            if (element.innerHTML === placeHolderText)
+                element.style.display = 'block';
+        }
+        e.onmouseleave = function () {
+            let element = document.getElementById('textSpace_' + this.id.split('_')[1]);
+            if (element.innerHTML === placeHolderText)
+                element.style.display = 'none';
         }
     });
 
@@ -135,7 +142,7 @@ let createPreview = function () {
         newSpan.setAttribute('class', 'text_space');
         newSpan.setAttribute('id', e.getAttribute('id'));
         newSpan.innerHTML = text;
-        
+        newSpan.onmouse
         if (text === placeHolderText) 
             newSpan.style.display = 'none';
         
